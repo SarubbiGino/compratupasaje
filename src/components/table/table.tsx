@@ -39,12 +39,12 @@ function createData(
       
       },
       
+      /*
       {
         id: 2,
         titulo: 'Canada',
         
       },
-      /*
       {
         id: 3,
         titulo: 'Canada',
@@ -61,23 +61,17 @@ function createData(
     ],
   };
 
+
+
+
+
 }
-const titulod =[{
-  id: 1,
-  titulo: 'Estados unidos',
-
-},
-{
-  id: 2,
-  titulo: 'francia',
-},
-{
-  id: 3,
-  titulo: 'Canada',
-},
-
-]
-
+/*
+ function numeroPrecio (){
+  var numero = Math.floor(Math.random() * 400000) + 1;
+  return numero;
+ }
+*/
 
   
 
@@ -154,7 +148,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 }
 
 const rows = [
-  createData('Estados Unidos','10/09/2022', 'Aerolineas Argentina', 100000),
+  createData('Estados Unidos','10/09/2022', 'Aerolineas Argentina', 321000),
   createData('Paris', '30/09/2022', 'BritishAero',  120000),
   createData('Alemania', '23/10/2022', 'BritishAero',  150000),
   createData('Argentina', '25/08/2022', 'DubaiAero',  80000),
@@ -163,7 +157,7 @@ const rows = [
 
 export default function CollapsibleTable() {
   return (
-    <TableContainer component={Paper} elevation={0} className={estilos.contenedorTabla}>
+    <TableContainer component={Paper} elevation={0} className={estilos.contenedorTabla} >
       <Table aria-label="collapsible table" className={estilos.tabla} >
         <TableHead>
           <TableRow>

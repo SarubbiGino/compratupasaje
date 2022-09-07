@@ -14,6 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import estilos from './header.module.css';
+import Link from 'next/link';
+
 
 const pages = ['Vuelos', 'Paquetes', 'Alquileres'];
 const settings = ['Perfil', 'Cuenta', 'Cerrar sesion'];
@@ -94,6 +96,7 @@ const ResponsiveAppBar = () => {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center" justifyContent="center">{page}</Typography>
+                  
                 </MenuItem>
               ))}
             </Menu>

@@ -2,21 +2,19 @@
   justify-content: center;
   text-align: center;
   position: relative;
-   width: 90%; 
   align-items: center;
   align-content: center;
   
 }
 .titulo{
   color: rgba(74, 11, 156, 0.849);
-  font-size: 50px;
+  font-size: 45px;
 }
-
 .main{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
 }
