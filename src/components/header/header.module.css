@@ -1,3 +1,48 @@
 .Appbar{
     background-color: rgba(74, 11, 156, 0.849);
 }
+
+
+.button,
+.buttonPrimary {
+  float: right;
+  border-radius: .3rem;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 10;
+  background-color: transparent;
+  color: #555;
+}
+
+.buttonPrimary {
+    
+  color: #fff;
+  text-decoration: none;
+  padding: .7rem 1.4rem;
+  margin-top: -15px;
+}
+
+.buttonPrimary:hover {
+  box-shadow: inset 0 0 5rem rgba(0,0,0,0.2)
+}
+
+@media (min-width: 900px) { 
+.buttonPrimary{
+  display: none;
+}
+.buttonPrimary2{
+  display:block;
+}
+}
+ 
+
+@media only screen and (max-width: 900px) {
+  .buttonPrimary {
+    margin-left: -30px;
+    padding: .7rem;
+  }
+  .buttonPrimary2{
+    display: none;
+  }
+  }
+

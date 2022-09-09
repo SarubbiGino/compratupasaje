@@ -15,10 +15,21 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import estilos from './header.module.css';
 import Link from 'next/link';
-
+import { signIn, signOut, useSession } from "next-auth/react"
+import { GetServerSideProps } from 'next'
+import { getSession } from 'next-auth/react';
+import LoginIcon from '@mui/icons-material/Login';
 
 const pages = ['Vuelos', 'Paquetes', 'Alquileres'];
-const settings = ['Perfil', 'Cuenta', 'Cerrar sesion'];
+const settings = ['Perfil', 'Cuenta', <a
+  href={`/api/auth/signout`}
+  onClick={(e) => {
+    e.preventDefault()
+    signOut()
+  }}
+>
+  Cerrar sesion
+</a>];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -39,7 +50,12 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
- 
+  const { data: session, status } = useSession()
+  const loading = status === 'loading'
+
+
+
+
 
 
   return (
@@ -61,7 +77,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            aVolar.ar
+           aVolar.ar
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -96,12 +112,13 @@ const ResponsiveAppBar = () => {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center" justifyContent="center">{page}</Typography>
-                  
                 </MenuItem>
               ))}
+
             </Menu>
+
           </Box>
-         
+
           <Typography
             variant="h5"
             noWrap
@@ -131,39 +148,98 @@ const ResponsiveAppBar = () => {
               </Button>
             ))}
           </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+          <div className={estilos.signedInStatus}>
+            <p
+              className={`nojs-show ${!session && loading ? estilos.loading : estilos.loaded
+                }`}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+              {!session && (
+                <>
+
+
+<a
+                    href={`/api/auth/signin`}
+                    className={estilos.buttonPrimary2}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      signIn()
+                    }}
+
+                  >
+                    Iniciar sesion
+                  </a>
+
+
+
+                  <a
+                    href={`/api/auth/signin`}
+                    className={estilos.buttonPrimary}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      signIn()
+                    }}
+
+                  >
+                    <LoginIcon /> 
+                  </a>
+
+                </>
+              )}
+              {session?.user && (
+                <>
+                  <span
+                    style={{ backgroundImage: `url(${session.user.image})` }}
+                    className={estilos.avatar}
+                  />
+                  <span className={estilos.signedInText}>
+
+                    <Box sx={{ flexGrow: 0 }}>
+                      <Tooltip title="Open settings">
+                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                          <Avatar alt="Remy Sharp" src={session.user.image} />
+                        </IconButton>
+                      </Tooltip>
+                      <Menu
+                        sx={{ mt: '45px' }}
+                        id="menu-appbar"
+                        anchorEl={anchorElUser}
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        open={Boolean(anchorElUser)}
+                        onClose={handleCloseUserMenu}
+                      >
+                        {settings.map((setting) => (
+                          <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                            <Typography textAlign="center">{setting}</Typography>
+
+
+                          </MenuItem>
+                        ))}
+
+                      </Menu>
+                    </Box>
+
+                  </span>
+
+                </>
+              )}
+            </p>
+          </div>
+
+
         </Toolbar>
       </Container>
     </AppBar>
   );
 };
+
+
+
 export default ResponsiveAppBar;

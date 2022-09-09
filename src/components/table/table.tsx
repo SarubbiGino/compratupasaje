@@ -116,7 +116,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell align="right">{row.precio_actual}</TableCell>
         <TableCell align="right">
         <Modal />
-      
         </TableCell>
       </TableRow>
       <TableRow>

@@ -4,7 +4,6 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Table  from '../src/components/table/table'
 import Header from '../src/components/header/header'
-import Layout from '../layout/layout'
 import Container from '@mui/material/Container'
 
 
