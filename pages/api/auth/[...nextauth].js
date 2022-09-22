@@ -26,10 +26,6 @@ export default NextAuth({
     //   },
     // }),
    
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_ID,
-      clientSecret: process.env.FACEBOOK_SECRET,
-    }),
     GithubProvider({
       clientId: process.env.GITHUB_CLIENTID,
       clientSecret: process.env.GITHUB_SECRET,
@@ -41,10 +37,7 @@ export default NextAuth({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),
-    TwitterProvider({
-      clientId: process.env.TWITTER_ID,
-      clientSecret: process.env.TWITTER_SECRET,
-    }),
+   
   ],
   // // Database optional. MySQL, Maria DB, Postgres and MongoDB are supported.
   // // https://next-auth.js.org/configuration/databases
@@ -103,18 +96,20 @@ export default NextAuth({
 
   // // Callbacks are asynchronous functions you can use to control what happens
   // // when an action is performed.
-  // // https://next-auth.js.org/configuration/callbacks
-  // callbacks: {
-  //   // async signIn({ user, account, profile, email, credentials }) { return true },
-  //   // async redirect({ url, baseUrl }) { return baseUrl },
-  //   // async session({ session, token, user }) { return session },
-  //   // async jwt({ token, user, account, profile, isNewUser }) { return token }
-  // },
+  // https://next-auth.js.org/configuration/callbacks
+   callbacks: {
+      async signIn({ user, account, profile, email, credentials }) { return true },
+      async redirect({ url, baseUrl }) { return baseUrl },
+      async session({ session, token, user }) { return session },
+      async jwt({ token, user, account, profile, isNewUser }) { return token }
+   },
 
   // // Events are useful for logging
   // // https://next-auth.js.org/configuration/events
   // events: {},
-
+  pages: {
+    signIn: "/signin",
+  },
   // // Enable debug messages in the console if you are having problems
   // debug: false,
 })
